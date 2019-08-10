@@ -12,15 +12,15 @@ import org.testng.annotations.*;
 
 public class BaseClass {
 	
-	public Properties prop;
+	public static Properties prop;
+	public static WebDriver webDriver;
 	String basePath = System.getProperty("user.dir");
-	public WebDriver webDriver;
 	
 	public BaseClass() {
 	
 	try {
 		prop = new Properties();
-		FileInputStream fs = new FileInputStream(basePath+"/amazonSeleniumTest/src/main/java/config/config.properties");
+		FileInputStream fs = new FileInputStream(basePath+"/src/main/java/config/config.properties");
 		prop.load(fs);
 	}
 	catch (FileNotFoundException e){
@@ -37,8 +37,10 @@ public class BaseClass {
 		
 		String browser = prop.getProperty("browserName");
 		if(browser.equalsIgnoreCase("chrome")){
+			System.setProperty("webdriver.chrome.driver",basePath+"/src/main/resource/chromedriver");
 			webDriver = new ChromeDriver();
-            System.setProperty("webdriver.chrome.driver",basePath+"/src/main/resources/chromedriver.exe");
+			System.out.println(prop.getProperty("baseURL"));
+
 		}
 	
 		  	webDriver.manage().window().maximize();

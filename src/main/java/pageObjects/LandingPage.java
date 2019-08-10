@@ -26,5 +26,4 @@ public class LandingPage extends BaseClass {
 	return new LoginPage();
 }
 
-
 }
